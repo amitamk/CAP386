@@ -10,7 +10,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 These are three ways we can do assignments:
 
-```{r class.source='bg-warning', class.output='bg-warning'}
+```{r}
 a <- 10
 b = 20
 30 -> c
@@ -27,7 +27,7 @@ cat(c)
 
 ## Listing and Removing Variables
 
-```{r error=TRUE, class.source='bg-warning', class.output='bg-warning'}
+```{r error=TRUE}
 ls()
 rm(b)
 print(b)

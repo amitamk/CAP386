@@ -42,9 +42,7 @@ Listing and Removing Variables
 ls()
 ```
 
-``` bg-warning
-## [1] "a" "b" "c"
-```
+    ## [1] "a" "b" "c"
 
 ``` r
 rm(b)
