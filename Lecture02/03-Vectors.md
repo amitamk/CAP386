@@ -1,6 +1,9 @@
 Vectors in R
 ================
 
+-   [Vectors](#vectors)
+-   [What if we mix types?](#what-if-we-mix-types)
+
 Vectors
 -------
 
@@ -45,6 +48,34 @@ class(cc)
 ```
 
     ## [1] "character"
+
+### Creating empty Vectors
+
+``` r
+v <- vector(length = 10)
+length(v)
+```
+
+    ## [1] 10
+
+``` r
+class(v)
+```
+
+    ## [1] "logical"
+
+``` r
+v <- vector(length = 10,mode = "numeric")
+length(v)
+```
+
+    ## [1] 10
+
+``` r
+class(v)
+```
+
+    ## [1] "numeric"
 
 What if we mix types?
 ---------------------

@@ -1,6 +1,9 @@
 ---
 title: "Vectors in R"
-output: github_document
+output:   
+  github_document:
+    toc: true
+    toc_depth: 2
 ---
 
 ```{r setup, include=FALSE}
@@ -21,6 +24,21 @@ class(n)
 length(cc)
 class(cc)
 ```
+
+### Creating empty Vectors
+
+```{r}
+v <- vector(length = 10)
+length(v)
+class(v)
+```
+
+```{r}
+v <- vector(length = 10,mode = "numeric")
+length(v)
+class(v)
+```
+
 
 ## What if we mix types?
 

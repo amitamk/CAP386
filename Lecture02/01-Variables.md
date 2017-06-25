@@ -1,6 +1,10 @@
 Variables in R
 ================
 
+-   [Assignments](#assignments)
+-   [Reading Variables](#reading-variables)
+-   [Listing and Removing Variables](#listing-and-removing-variables)
+
 Assignments
 -----------
 

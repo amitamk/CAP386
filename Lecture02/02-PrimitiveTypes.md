@@ -1,6 +1,8 @@
 Primitive Types in R
 ================
 
+-   [Primitive Data Types](#primitive-data-types)
+
 Primitive Data Types
 --------------------
 
