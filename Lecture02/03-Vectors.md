@@ -66,6 +66,12 @@ class(v)
     ## [1] "logical"
 
 ``` r
+v
+```
+
+    ##  [1] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+
+``` r
 v <- vector(length = 10,mode = "numeric")
 length(v)
 ```
@@ -77,6 +83,12 @@ class(v)
 ```
 
     ## [1] "numeric"
+
+``` r
+v
+```
+
+    ##  [1] 0 0 0 0 0 0 0 0 0 0
 
 What if we mix types?
 ---------------------

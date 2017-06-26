@@ -31,12 +31,14 @@ class(cc)
 v <- vector(length = 10)
 length(v)
 class(v)
+v
 ```
 
 ```{r}
 v <- vector(length = 10,mode = "numeric")
 length(v)
 class(v)
+v
 ```
 
 
