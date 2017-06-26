@@ -3,7 +3,7 @@ title: "Data Frames"
 output:   
   github_document:
     toc: true
-    toc_depth: 2
+    toc_depth: 3
 ---
 
 ```{r setup, include=FALSE}
@@ -102,6 +102,54 @@ sjcTemps[1:6,c(1,3)]
 sjcTemps["Jul",2:3]
 sjcTemps[c("Jan","Jul"),c("Max","Min")]
 ```
+
+If we can read these values, we can change them.
+
+```{r}
+sjcTemps3 <- sjcTemps
+sjcTemps3["Jul",] <- 0
+sjcTemps3[,"Avg"] <- 0
+sjcTemps3["Aug",] <- c(1,2,3)
+sjcTemps3["Jul",] <- sjcTemps3["Jul",]+c(3,4)
+sjcTemps3["Dec","Max"] <- 50
+sjcTemps3
+```
+
+### Adding More Data, Removing Data
+
+We can add new columns to a Data Frame: just choose a new column name and an operation to fill it.
+```{r}
+sjcTemps$Range <- sjcTemps$Max-sjcTemps$Min
+sjcTemps$Flag <- TRUE
+sjcTemps$Vacations <- c(TRUE,TRUE,FALSE,FALSE,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,FALSE,TRUE)
+sjcTemps$Season <- factor(c('Summer','Summer','Autumn','Autumn','Autumn','Winter',
+                     'Winter','Winter','Spring','Spring','Spring','Summer'))
+sjcTemps
+str(sjcTemps)
+```
+
+We can also drop columns from a Data Frame:
+```{r}
+sjcTempsModified <- sjcTemps # avoid changing this one...
+sjcTempsModified$Avg <- NULL
+sjcTempsModified$Flag <- NULL
+head(sjcTempsModified)
+```
+
+Other way do to this:
+```{r}
+sjcTempsModified <- subset(sjcTemps, select = c(Min,Max,Season))
+# Also: sjcTempsModified <- sjcTemps[keep]
+head(sjcTempsModified)
+```
+
+Another one:
+```{r}
+sjcTempsModified <- subset(sjcTemps, select = -c(Range,Flag,Avg,Season))
+head(sjcTempsModified)
+```
+
+
 
 ## Reading Data Frames
 

@@ -2,7 +2,11 @@ Data Frames
 ================
 
 -   [Data Frames are Tables](#data-frames-are-tables)
+    -   [Information on Data Frames](#information-on-data-frames)
+    -   [Accessing Data Frames Elements](#accessing-data-frames-elements)
+    -   [Adding More Data, Removing Data](#adding-more-data-removing-data)
 -   [Reading Data Frames](#reading-data-frames)
+    -   [From CSV](#from-csv)
 -   [Writing and Reading R Data](#writing-and-reading-r-data)
 
 Data Frames are Tables
@@ -234,6 +238,120 @@ sjcTemps[c("Jan","Jul"),c("Max","Min")]
     ##      Max  Min
     ## Jan 29.7 16.2
     ## Jul 24.1  8.2
+
+If we can read these values, we can change them.
+
+``` r
+sjcTemps3 <- sjcTemps
+sjcTemps3["Jul",] <- 0
+sjcTemps3[,"Avg"] <- 0
+sjcTemps3["Aug",] <- c(1,2,3)
+sjcTemps3["Jul",] <- sjcTemps3["Jul",]+c(3,4)
+sjcTemps3["Dec","Max"] <- 50
+sjcTemps3
+```
+
+    ##      Max Avg  Min
+    ## Jan 29.7   0 16.2
+    ## Feb 30.1   0 16.5
+    ## Mar 29.5   0 15.7
+    ## Apr 27.3   0 13.2
+    ## May 25.1   0 10.1
+    ## Jun 24.3   0  8.9
+    ## Jul  3.0   4  3.0
+    ## Aug  1.0   2  3.0
+    ## Sep 27.2   0 11.9
+    ## Oct 27.3   0 13.4
+    ## Nov 28.0   0 14.2
+    ## Dec 50.0   0 15.3
+
+### Adding More Data, Removing Data
+
+We can add new columns to a Data Frame: just choose a new column name and an operation to fill it.
+
+``` r
+sjcTemps$Range <- sjcTemps$Max-sjcTemps$Min
+sjcTemps$Flag <- TRUE
+sjcTemps$Vacations <- c(TRUE,TRUE,FALSE,FALSE,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,FALSE,TRUE)
+sjcTemps$Season <- factor(c('Summer','Summer','Autumn','Autumn','Autumn','Winter',
+                     'Winter','Winter','Spring','Spring','Spring','Summer'))
+sjcTemps
+```
+
+    ##      Max  Avg  Min Range Flag Vacations Season
+    ## Jan 29.7 22.2 16.2  13.5 TRUE      TRUE Summer
+    ## Feb 30.1 22.4 16.5  13.6 TRUE      TRUE Summer
+    ## Mar 29.5 21.6 15.7  13.8 TRUE     FALSE Autumn
+    ## Apr 27.3 19.6 13.2  14.1 TRUE     FALSE Autumn
+    ## May 25.1 17.0 10.1  15.0 TRUE     FALSE Autumn
+    ## Jun 24.3 16.1  8.9  15.4 TRUE     FALSE Winter
+    ## Jul 24.1 15.6  8.2  15.9 TRUE      TRUE Winter
+    ## Aug 26.2 17.1  9.9  16.3 TRUE     FALSE Winter
+    ## Sep 27.2 18.8 11.9  15.3 TRUE     FALSE Spring
+    ## Oct 27.3 19.4 13.4  13.9 TRUE     FALSE Spring
+    ## Nov 28.0 20.3 14.2  13.8 TRUE     FALSE Spring
+    ## Dec 28.7 21.4 15.3  13.4 TRUE      TRUE Summer
+
+``` r
+str(sjcTemps)
+```
+
+    ## 'data.frame':    12 obs. of  7 variables:
+    ##  $ Max      : num  29.7 30.1 29.5 27.3 25.1 24.3 24.1 26.2 27.2 27.3 ...
+    ##  $ Avg      : num  22.2 22.4 21.6 19.6 17 16.1 15.6 17.1 18.8 19.4 ...
+    ##  $ Min      : num  16.2 16.5 15.7 13.2 10.1 8.9 8.2 9.9 11.9 13.4 ...
+    ##  $ Range    : num  13.5 13.6 13.8 14.1 15 15.4 15.9 16.3 15.3 13.9 ...
+    ##  $ Flag     : logi  TRUE TRUE TRUE TRUE TRUE TRUE ...
+    ##  $ Vacations: logi  TRUE TRUE FALSE FALSE FALSE FALSE ...
+    ##  $ Season   : Factor w/ 4 levels "Autumn","Spring",..: 3 3 1 1 1 4 4 4 2 2 ...
+
+We can also drop columns from a Data Frame:
+
+``` r
+sjcTempsModified <- sjcTemps # avoid changing this one...
+sjcTempsModified$Avg <- NULL
+sjcTempsModified$Flag <- NULL
+head(sjcTempsModified)
+```
+
+    ##      Max  Min Range Vacations Season
+    ## Jan 29.7 16.2  13.5      TRUE Summer
+    ## Feb 30.1 16.5  13.6      TRUE Summer
+    ## Mar 29.5 15.7  13.8     FALSE Autumn
+    ## Apr 27.3 13.2  14.1     FALSE Autumn
+    ## May 25.1 10.1  15.0     FALSE Autumn
+    ## Jun 24.3  8.9  15.4     FALSE Winter
+
+Other way do to this:
+
+``` r
+sjcTempsModified <- subset(sjcTemps, select = c(Min,Max,Season))
+# Also: sjcTempsModified <- sjcTemps[keep]
+head(sjcTempsModified)
+```
+
+    ##      Min  Max Season
+    ## Jan 16.2 29.7 Summer
+    ## Feb 16.5 30.1 Summer
+    ## Mar 15.7 29.5 Autumn
+    ## Apr 13.2 27.3 Autumn
+    ## May 10.1 25.1 Autumn
+    ## Jun  8.9 24.3 Winter
+
+Another one:
+
+``` r
+sjcTempsModified <- subset(sjcTemps, select = -c(Range,Flag,Avg,Season))
+head(sjcTempsModified)
+```
+
+    ##      Max  Min Vacations
+    ## Jan 29.7 16.2      TRUE
+    ## Feb 30.1 16.5      TRUE
+    ## Mar 29.5 15.7     FALSE
+    ## Apr 27.3 13.2     FALSE
+    ## May 25.1 10.1     FALSE
+    ## Jun 24.3  8.9     FALSE
 
 Reading Data Frames
 -------------------

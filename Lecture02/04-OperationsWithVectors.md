@@ -2,8 +2,11 @@ Operations with Vectors
 ================
 
 -   [Basic Operations with Vectors](#basic-operations-with-vectors)
+    -   [Accessing Elements in a Vector](#accessing-elements-in-a-vector)
+    -   [Mathematical Operations in Vectors](#mathematical-operations-in-vectors)
 -   [Recycling Rule](#recycling-rule)
 -   [Missing Data in Vectors](#missing-data-in-vectors)
+    -   [Filtering by NAs](#filtering-by-nas)
 
 Basic Operations with Vectors
 -----------------------------

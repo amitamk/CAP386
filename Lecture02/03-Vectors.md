@@ -2,6 +2,7 @@ Vectors in R
 ================
 
 -   [Vectors](#vectors)
+    -   [Creating empty Vectors](#creating-empty-vectors)
 -   [What if we mix types?](#what-if-we-mix-types)
 
 Vectors
