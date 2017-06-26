@@ -1,0 +1,120 @@
+---
+title: "Data Frames"
+output:   
+  github_document:
+    toc: true
+    toc_depth: 2
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+## Data Frames are Tables
+
+Data Frames are the most common way to represent data in R in Data Science and Data Mining applications.
+
+We can create data frames from sets of observations. This below is a column-based example.
+
+```{r}
+maxTempSJC <- c(29.7,30.1,29.5,27.3,25.1,24.3,24.1,26.2,27.2,27.3,28,28.7)
+avgTempSJC <- c(22.2,22.4,21.6,19.6,17,16.1,15.6,17.1,18.8,19.4,20.3,21.4)
+minTempSJC <- c(16.2,16.5,15.7,13.2,10.1,8.9,8.2,9.9,11.9,13.4,14.2,15.3)
+months <- c("Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec")
+sjcTemps <- data.frame(Max=maxTempSJC,Avg=avgTempSJC,Min=minTempSJC,row.names = months)
+sjcTemps
+class(sjcTemps)
+```
+Now for a row-based example, starting with an empty Data Frame:
+
+```{r}
+sjcTemps2 <- data.frame(Max=numeric(),Avg=numeric(),Min=numeric())
+sjcTemps2 <- rbind(sjcTemps2,data.frame(Max=29.7,Avg=22.2,Min=16.2))
+sjcTemps2 <- rbind(sjcTemps2,data.frame(Max=30.1,Avg=22.4,Min=16.5))
+sjcTemps2 <- rbind(sjcTemps2,data.frame(Max=29.5,Avg=21.6,Min=15.7))
+sjcTemps2 <- rbind(sjcTemps2,data.frame(Max=27.3,Avg=19.6,Min=13.2))
+sjcTemps2 <- rbind(sjcTemps2,data.frame(Max=25.1,Avg=17,  Min=10.1))
+sjcTemps2 <- rbind(sjcTemps2,data.frame(Max=24.3,Avg=16.1,Min= 8.9))
+sjcTemps2 <- rbind(sjcTemps2,data.frame(Max=24.1,Avg=15.6,Min= 8.2))
+sjcTemps2 <- rbind(sjcTemps2,data.frame(Max=26.2,Avg=17.1,Min= 9.9))
+sjcTemps2 <- rbind(sjcTemps2,data.frame(Max=27.2,Avg=18.8,Min=11.9))
+sjcTemps2 <- rbind(sjcTemps2,data.frame(Max=27.3,Avg=19.4,Min=13.4))
+sjcTemps2 <- rbind(sjcTemps2,data.frame(Max=28,  Avg=20.3,Min=14.2))
+sjcTemps2 <- rbind(sjcTemps2,data.frame(Max=28.7,Avg=21.4,Min=15.3))
+row.names(sjcTemps2) <- months
+sjcTemps2
+class(sjcTemps2)
+```
+
+### Information on Data Frames
+
+Basic functions to get information on data frames:
+```{r}
+nrow(sjcTemps)
+ncol(sjcTemps)
+head(sjcTemps)
+```
+
+More information with <tt>str</tt>:
+```{r}
+str(sjcTemps)
+```
+Even more information (statistics) with <tt>summary</tt>:
+```{r}
+summary(sjcTemps)
+```
+
+### Accessing Data Frames Elements
+
+Accessing by columns' names
+
+```{r}
+sjcTemps$Min
+sjcTemps$Max
+```
+
+Accessing individual values
+
+```{r}
+sjcTemps$Min[2]
+sjcTemps$Max[2]
+```
+
+Basic slicing:
+
+```{r}
+sjcTemps[,2]
+sjcTemps[2,]
+sjcTemps[2,2]
+```
+
+Using names:
+
+```{r}
+sjcTemps["Jul",]
+sjcTemps["Jul",1]
+sjcTemps["Jul","Min"]
+```
+
+Using ranges, etc.:
+
+```{r}
+sjcTemps[1:6,c(1,3)]
+sjcTemps["Jul",2:3]
+sjcTemps[c("Jan","Jul"),c("Max","Min")]
+```
+
+
+## Reading Data Frames
+
+Creating Data Frames in code is not practical. Let's read them from files.
+
+### From CSV
+
+
+## Writing and Reading R Data
+
+dump
+source
+
+
+

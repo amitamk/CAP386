@@ -62,7 +62,7 @@ range
     ##  Jan  Feb  Mar  Apr  May  Jun  Jul  Aug  Sep  Oct  Nov  Dec 
     ## 17.7 18.7 20.3 22.5 22.1 21.9 21.4 21.2 21.6 23.3 21.6 18.7
 
-Covnert it to Celsius:
+Convert it to Celsius:
 
 ``` r
 tempHiC <- (5/9) * (tempHi - 32)

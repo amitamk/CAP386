@@ -48,7 +48,7 @@ range <- tempHi-tempLo
 range
 ```
 
-Covnert it to Celsius:
+Convert it to Celsius:
 
 ```{r}
 tempHiC <- (5/9) * (tempHi - 32)
