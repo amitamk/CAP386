@@ -103,7 +103,6 @@ sjcTemps["Jul",2:3]
 sjcTemps[c("Jan","Jul"),c("Max","Min")]
 ```
 
-
 ## Reading Data Frames
 
 Creating Data Frames in code is not practical. Let's read them from files.
