@@ -7,7 +7,7 @@ Data Frames
     -   [Adding More Data, Removing Data](#adding-more-data-removing-data)
 -   [Reading and Writing Data Frames](#reading-and-writing-data-frames)
     -   [.. as CSV](#as-csv)
-    -   [Writing and Reading R Data](#writing-and-reading-r-data)
+    -   [.. as R Data](#as-r-data)
 
 Data Frames are Tables
 ----------------------
@@ -360,23 +360,8 @@ Creating Data Frames in code is not practical. Let's read them from files.
 
 ### .. as CSV
 
-Let's read a file like this into R:
-<pre>
-TAUBATE,Maximum Absolute Temperature,Maximum Average Temperature,Average Temperature,Minimum Average Temperature,Minimum Absolute Temperature,Rainfall (mm),Days with Rainfall >= 1mm,Relative Humidity,Sunshine Hours
-Jan,36.7,30.2,23.3,17.7,10.9,233.5,17,76.8,170
-Feb,40.1,30.5,23.5,17.8,12.6,192.1,14,76.7,168.2
-Mar,36.2,29.9,22.9,17.8,11.6,173.5,12,76.8,179.5
-Apr,34.2,27.8,20.8,16.1,5.4,67.1,7,75.9,177.3
-May,32.6,25.4,18.1,14.2,4.2,40.9,4,76.2,176.1
-Jun,31,24.6,16.7,12.9,1.1,29.3,4,75.7,175.6
-Jul,32.1,24.4,16.4,12.6,0.9,31.1,4,72.5,188.9
-Aug,35.6,26.4,18.2,14,2.6,41.7,4,69.1,186.2
-Sep,37.8,27.6,20,15.7,3.8,64,6,69.2,158.8
-Oct,38,27.5,20.7,16.4,7.8,132.8,11,74,148.8
-Nov,37.4,28.7,21.7,16.9,8.6,146.2,12,73.8,161.5
-Dec,37.5,29.1,22.7,17.1,11,244.6,16,76.8,155
-Year,40.1,27.7,20.4,15.8,0.9,1396.8,111,74.5,2045.9
-</pre>
+Let's read a CSV file into R (check it here: <https://github.com/rafaeldcsantos/CAP386/blob/master/Data/Taubate.csv>)
+
 ``` r
 taubateWeather <- read.csv(file="../Data/Taubate.csv", header=TRUE, sep=",")
 taubateWeather
@@ -470,6 +455,46 @@ Let's save it.
 write.csv(taubateWeather, file = "../Data/Taubate-Fixed.csv")
 ```
 
-### Writing and Reading R Data
+See it here: <https://github.com/rafaeldcsantos/CAP386/blob/master/Data/Taubate-Fixed.csv>
 
-dump source
+### .. as R Data
+
+We can save R objects (including data frames) like this:
+
+``` r
+dump("taubateWeather", file = "../Data/Taubate-Fixed.R")
+```
+
+See the file here: <https://github.com/rafaeldcsantos/CAP386/blob/master/Data/Taubate-Fixed.R>
+
+We can read dumped objects with <tt>source</tt>:
+
+``` r
+rm(taubateWeather) # make sure it is gone!
+source(file = "../Data/Taubate-Fixed.R")
+str(taubateWeather)
+```
+
+    ## 'data.frame':    12 obs. of  10 variables:
+    ##  $ Month                       : Factor w/ 13 levels "Apr","Aug","Dec",..: 5 4 8 1 9 7 6 2 12 11 ...
+    ##  $ Maximum.Absolute.Temperature: num  36.7 40.1 36.2 34.2 32.6 31 32.1 35.6 37.8 38 ...
+    ##  $ Maximum.Average.Temperature : num  30.2 30.5 29.9 27.8 25.4 24.6 24.4 26.4 27.6 27.5 ...
+    ##  $ Average.Temperature         : num  23.3 23.5 22.9 20.8 18.1 16.7 16.4 18.2 20 20.7 ...
+    ##  $ Minimum.Average.Temperature : num  17.7 17.8 17.8 16.1 14.2 12.9 12.6 14 15.7 16.4 ...
+    ##  $ Minimum.Absolute.Temperature: num  10.9 12.6 11.6 5.4 4.2 1.1 0.9 2.6 3.8 7.8 ...
+    ##  $ Rainfall..mm.               : num  233.5 192.1 173.5 67.1 40.9 ...
+    ##  $ Days.with.Rainfall....1mm   : int  17 14 12 7 4 4 4 4 6 11 ...
+    ##  $ Relative.Humidity           : num  76.8 76.7 76.8 75.9 76.2 75.7 72.5 69.1 69.2 74 ...
+    ##  $ Sunshine.Hours              : num  170 168 180 177 176 ...
+
+Dump can be used to dump several objects in the same file.
+
+``` r
+l <- c(FALSE,FALSE,TRUE,FALSE)
+n <- c(12.333,12.389,12.918,13,14.021)
+cc <- c('programming','r','python')
+v <- pi*2;
+dump(c("taubateWeather","l","n","cc","v"), file = "../Data/SomeMixedData.R")
+```
+
+See the file here: <https://github.com/rafaeldcsantos/CAP386/blob/master/Data/SomeMixedData.R>
