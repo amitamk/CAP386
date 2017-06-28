@@ -1,0 +1,190 @@
+---
+title: "Academic Indicators"
+output: github_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(ggplot2)
+library(reshape2)
+library(directlabels)
+```
+
+## About
+
+### Reading the data
+
+```{r}
+indicators <- read.csv(file="../Data/AcademicIndicators.csv", header=TRUE, sep=",", stringsAsFactors=FALSE)
+str(indicators)
+```
+
+### Subsetting and melting the data - Why and How
+
+```{r}
+# Get only the columns we need
+subset <- subset(indicators, select = c(IES,PP2013,PP2014,PP2015,PP2016))
+# Change labels on the columns
+colnames(subset) <- c("IES",2013,2014,2015,2016)
+meltedsubset <- melt(subset, id.vars="IES", value.name="Count", variable.name="Year")
+meltedsubset
+```
+
+### Setting up some layers and lists for ggplot
+
+https://stackoverflow.com/questions/18747091/reuse-ggplot-layers-in-multiple-plots
+
+http://www.cookbook-r.com/Graphs/Shapes_and_line_types/
+
+```{r}
+lthick <- c(1,1,1,2.5,1,1,1,1)
+lstyle <- c("dashed","dashed","dashed","solid","solid","solid","dashed","dashed")
+mygglayers = list(
+    geom_line(aes(size=IES,linetype=IES)),
+    geom_point(size=4, shape=21, fill="white"),
+    scale_size_manual(values = lthick),
+    scale_linetype_manual(values = lstyle)
+)
+```
+
+
+
+
+## How many papers were published?
+
+### Preprocessing and reshaping the data
+
+```{r}
+# Get only the columns we need
+subset <- subset(indicators, select = c(IES,PP2013,PP2014,PP2015,PP2016))
+# Change labels on the columns
+colnames(subset) <- c("IES",2013,2014,2015,2016)
+# Annotating the IES names with the grade in the last evaluation 
+subset$IES = paste(subset$IES," (",indicators$Grade.in.2013,")",sep = "")
+meltedsubset <- melt(subset, id.vars="IES", value.name="Count", variable.name="Year")
+```
+
+## The Plot
+
+```{r fig.width=8, fig.height=4}
+ggplot(data=meltedsubset, aes(x=Year, y=Count, group = IES, colour = IES)) +
+    ggtitle("Papers") +
+    mygglayers
+```
+
+## Adjusting for number of lecturers
+
+https://stackoverflow.com/questions/39563283/r-divide-some-columns-of-a-data-frame-and-keeping-the-others
+
+```{r fig.width=8, fig.height=4}
+subset[,-1] = subset[,-1] / indicators[,c('Students2016')]
+#subset[,-1] = subset[,-1] / indicators[,c('Lecturers2016')]
+subset
+meltedsubset <- melt(subset, id.vars="IES", value.name="Count", variable.name="Year")
+ggplot(data=meltedsubset, aes(x=Year, y=Count, group = IES, colour = IES)) +
+    ggtitle("Papers (divided by lecturers)") +
+    mygglayers
+```
+
+
+
+
+## How many books were published?
+
+### Preprocessing and reshaping the data
+
+```{r}
+# Get only the columns we need
+subset <- subset(indicators, select = c(IES,BP2013,BP2014,BP2015,BP2016))
+# Change labels on the columns
+colnames(subset) <- c("IES",2013,2014,2015,2016)
+meltedsubset <- melt(subset, id.vars="IES", value.name="Count", variable.name="Year")
+```
+
+```{r fig.width=8, fig.height=4}
+ggplot(data=meltedsubset, aes(x=Year, y=Count, group = IES, colour = IES)) +
+    ggtitle("Books") +
+    mygglayers
+```
+
+## How many papers in conferences?
+
+### Preprocessing and reshaping the data
+
+```{r}
+# Get only the columns we need
+subset <- subset(indicators, select = c(IES,CN2013,CN2014,CN2015,CN2016))
+# Change labels on the columns
+colnames(subset) <- c("IES",2013,2014,2015,2016)
+meltedsubset <- melt(subset, id.vars="IES", value.name="Count", variable.name="Year")
+```
+
+```{r fig.width=8, fig.height=4}
+ggplot(data=meltedsubset, aes(x=Year, y=Count, group = IES, colour = IES)) +
+    ggtitle("Papers in Conferences") +
+    mygglayers
+```
+
+## How many talks?
+
+### Preprocessing and reshaping the data
+
+```{r}
+# Get only the columns we need
+subset <- subset(indicators, select = c(IES,TK2013,TK2014,TK2015,TK2016))
+# Change labels on the columns
+colnames(subset) <- c("IES",2013,2014,2015,2016)
+meltedsubset <- melt(subset, id.vars="IES", value.name="Count", variable.name="Year")
+```
+
+```{r fig.width=8, fig.height=4}
+ggplot(data=meltedsubset, aes(x=Year, y=Count, group = IES, colour = IES)) +
+    ggtitle("Talks") +
+    mygglayers
+```
+
+
+## How many short courses?
+
+### Preprocessing and reshaping the data
+
+```{r}
+# Get only the columns we need
+subset <- subset(indicators, select = c(IES,SC2013,SC2014,SC2015,SC2016))
+# Change labels on the columns
+colnames(subset) <- c("IES",2013,2014,2015,2016)
+meltedsubset <- melt(subset, id.vars="IES", value.name="Count", variable.name="Year")
+```
+
+```{r fig.width=8, fig.height=4}
+ggplot(data=meltedsubset, aes(x=Year, y=Count, group = IES, colour = IES)) +
+    ggtitle("Short Courses") +
+    mygglayers
+```
+
+## How many events were organized?
+
+### Preprocessing and reshaping the data
+
+```{r}
+# Get only the columns we need
+subset <- subset(indicators, select = c(IES,EO2013,EO2014,EO2015,EO2016))
+# Change labels on the columns
+colnames(subset) <- c("IES",2013,2014,2015,2016)
+meltedsubset <- melt(subset, id.vars="IES", value.name="Count", variable.name="Year")
+```
+
+```{r fig.width=8, fig.height=4}
+ggplot(data=meltedsubset, aes(x=Year, y=Count, group = IES, colour = IES)) +
+    ggtitle("Events Organized") +
+    mygglayers
+```
+
+## References
+
+
+ (from https://stackoverflow.com/questions/17150183/plot-multiple-lines-in-one-graph)
+ https://stackoverflow.com/questions/27350243/ggplot-line-graph-with-different-line-styles-and-markers
+https://stackoverflow.com/questions/17996410/ggplot-specific-thick-line
+
+labels:; factor order http://rstudio-pubs-static.s3.amazonaws.com/7433_4537ea5073dc4162950abb715f513469.html

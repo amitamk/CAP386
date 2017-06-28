@@ -8,6 +8,7 @@ Data Frames
 -   [Reading and Writing Data Frames](#reading-and-writing-data-frames)
     -   [.. as CSV](#as-csv)
     -   [.. as R Data](#as-r-data)
+-   [Missing Values (again)](#missing-values-again)
 
 Data Frames are Tables
 ----------------------
@@ -363,7 +364,7 @@ Creating Data Frames in code is not practical. Let's read them from files.
 Let's read a CSV file into R (check it here: <https://github.com/rafaeldcsantos/CAP386/blob/master/Data/Taubate.csv>)
 
 ``` r
-taubateWeather <- read.csv(file="../Data/Taubate.csv", header=TRUE, sep=",")
+taubateWeather <- read.csv(file="../Data/Taubate.csv", header=TRUE, sep=",", stringsAsFactors=FALSE)
 taubateWeather
 ```
 
@@ -438,7 +439,7 @@ str(taubateWeather)
 ```
 
     ## 'data.frame':    12 obs. of  10 variables:
-    ##  $ Month                       : Factor w/ 13 levels "Apr","Aug","Dec",..: 5 4 8 1 9 7 6 2 12 11 ...
+    ##  $ Month                       : chr  "Jan" "Feb" "Mar" "Apr" ...
     ##  $ Maximum.Absolute.Temperature: num  36.7 40.1 36.2 34.2 32.6 31 32.1 35.6 37.8 38 ...
     ##  $ Maximum.Average.Temperature : num  30.2 30.5 29.9 27.8 25.4 24.6 24.4 26.4 27.6 27.5 ...
     ##  $ Average.Temperature         : num  23.3 23.5 22.9 20.8 18.1 16.7 16.4 18.2 20 20.7 ...
@@ -476,7 +477,7 @@ str(taubateWeather)
 ```
 
     ## 'data.frame':    12 obs. of  10 variables:
-    ##  $ Month                       : Factor w/ 13 levels "Apr","Aug","Dec",..: 5 4 8 1 9 7 6 2 12 11 ...
+    ##  $ Month                       : chr  "Jan" "Feb" "Mar" "Apr" ...
     ##  $ Maximum.Absolute.Temperature: num  36.7 40.1 36.2 34.2 32.6 31 32.1 35.6 37.8 38 ...
     ##  $ Maximum.Average.Temperature : num  30.2 30.5 29.9 27.8 25.4 24.6 24.4 26.4 27.6 27.5 ...
     ##  $ Average.Temperature         : num  23.3 23.5 22.9 20.8 18.1 16.7 16.4 18.2 20 20.7 ...
@@ -498,3 +499,112 @@ dump(c("taubateWeather","l","n","cc","v"), file = "../Data/SomeMixedData.R")
 ```
 
 See the file here: <https://github.com/rafaeldcsantos/CAP386/blob/master/Data/SomeMixedData.R>
+
+Missing Values (again)
+----------------------
+
+File with missing data: <https://github.com/rafaeldcsantos/CAP386/blob/master/Data/TaubateMissing.R>
+
+``` r
+taubateMissing <- read.csv(file="../Data/TaubateMissing.csv", header=TRUE, sep=",", stringsAsFactors=FALSE)
+taubateMissing
+```
+
+    ##    TAUBATE Maximum.Absolute.Temperature Maximum.Average.Temperature
+    ## 1      Jan                         36.7                        30.2
+    ## 2      Feb                         40.1                        30.5
+    ## 3      Mar                         36.2                        29.9
+    ## 4      Apr                         34.2                          NA
+    ## 5      May                         32.6                        25.4
+    ## 6      Jun                         31.0                        24.6
+    ## 7      Jul                         32.1                        24.4
+    ## 8      Aug                         35.6                        26.4
+    ## 9      Sep                         37.8                        27.6
+    ## 10     Oct                         38.0                        27.5
+    ## 11     Nov                         37.4                        28.7
+    ## 12     Dec                         37.5                        29.1
+    ## 13    Year                         40.1                        27.7
+    ##    Average.Temperature Minimum.Average.Temperature
+    ## 1                 23.3                        17.7
+    ## 2                 23.5                        17.8
+    ## 3                 22.9                        17.8
+    ## 4                 20.8                        16.1
+    ## 5                 18.1                        14.2
+    ## 6                 16.7                        12.9
+    ## 7                 16.4                        12.6
+    ## 8                 18.2                        14.0
+    ## 9                 20.0                        15.7
+    ## 10                20.7                          NA
+    ## 11                21.7                        16.9
+    ## 12                22.7                        17.1
+    ## 13                20.4                        15.8
+    ##    Minimum.Absolute.Temperature Rainfall..mm. Days.with.Rainfall....1mm
+    ## 1                          10.9         233.5                        17
+    ## 2                          12.6         192.1                        14
+    ## 3                          11.6         173.5                        12
+    ## 4                           5.4          67.1                         7
+    ## 5                           4.2          40.9                         4
+    ## 6                           1.1            NA                         4
+    ## 7                           0.9          31.1                         4
+    ## 8                           2.6          41.7                         4
+    ## 9                           3.8          64.0                         6
+    ## 10                          7.8         132.8                        11
+    ## 11                          8.6         146.2                        12
+    ## 12                         11.0         244.6                        NA
+    ## 13                          0.9        1396.8                       111
+    ##    Relative.Humidity Sunshine.Hours
+    ## 1               76.8          170.0
+    ## 2               76.7          168.2
+    ## 3               76.8          179.5
+    ## 4               75.9          177.3
+    ## 5               76.2          176.1
+    ## 6               75.7          175.6
+    ## 7               72.5          188.9
+    ## 8               69.1          186.2
+    ## 9               69.2          158.8
+    ## 10              74.0          148.8
+    ## 11              73.8          161.5
+    ## 12              76.8          155.0
+    ## 13              74.5         2045.9
+
+``` r
+str(taubateMissing)
+```
+
+    ## 'data.frame':    13 obs. of  10 variables:
+    ##  $ TAUBATE                     : chr  "Jan" "Feb" "Mar" "Apr" ...
+    ##  $ Maximum.Absolute.Temperature: num  36.7 40.1 36.2 34.2 32.6 31 32.1 35.6 37.8 38 ...
+    ##  $ Maximum.Average.Temperature : num  30.2 30.5 29.9 NA 25.4 24.6 24.4 26.4 27.6 27.5 ...
+    ##  $ Average.Temperature         : num  23.3 23.5 22.9 20.8 18.1 16.7 16.4 18.2 20 20.7 ...
+    ##  $ Minimum.Average.Temperature : num  17.7 17.8 17.8 16.1 14.2 12.9 12.6 14 15.7 NA ...
+    ##  $ Minimum.Absolute.Temperature: num  10.9 12.6 11.6 5.4 4.2 1.1 0.9 2.6 3.8 7.8 ...
+    ##  $ Rainfall..mm.               : num  233.5 192.1 173.5 67.1 40.9 ...
+    ##  $ Days.with.Rainfall....1mm   : int  17 14 12 7 4 4 4 4 6 11 ...
+    ##  $ Relative.Humidity           : num  76.8 76.7 76.8 75.9 76.2 75.7 72.5 69.1 69.2 74 ...
+    ##  $ Sunshine.Hours              : num  170 168 180 177 176 ...
+
+Which are the rows with complete cases?
+
+``` r
+complete.cases(taubateMissing)
+```
+
+    ##  [1]  TRUE  TRUE  TRUE FALSE  TRUE FALSE  TRUE  TRUE  TRUE FALSE  TRUE
+    ## [12] FALSE  TRUE
+
+``` r
+okdata <- subset(taubateMissing,complete.cases(taubateMissing))
+str(okdata)
+```
+
+    ## 'data.frame':    9 obs. of  10 variables:
+    ##  $ TAUBATE                     : chr  "Jan" "Feb" "Mar" "May" ...
+    ##  $ Maximum.Absolute.Temperature: num  36.7 40.1 36.2 32.6 32.1 35.6 37.8 37.4 40.1
+    ##  $ Maximum.Average.Temperature : num  30.2 30.5 29.9 25.4 24.4 26.4 27.6 28.7 27.7
+    ##  $ Average.Temperature         : num  23.3 23.5 22.9 18.1 16.4 18.2 20 21.7 20.4
+    ##  $ Minimum.Average.Temperature : num  17.7 17.8 17.8 14.2 12.6 14 15.7 16.9 15.8
+    ##  $ Minimum.Absolute.Temperature: num  10.9 12.6 11.6 4.2 0.9 2.6 3.8 8.6 0.9
+    ##  $ Rainfall..mm.               : num  233.5 192.1 173.5 40.9 31.1 ...
+    ##  $ Days.with.Rainfall....1mm   : int  17 14 12 4 4 4 6 12 111
+    ##  $ Relative.Humidity           : num  76.8 76.7 76.8 76.2 72.5 69.1 69.2 73.8 74.5
+    ##  $ Sunshine.Hours              : num  170 168 180 176 189 ...

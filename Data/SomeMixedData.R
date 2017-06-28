@@ -1,8 +1,6 @@
 taubateWeather <-
-structure(list(Month = structure(c(5L, 4L, 8L, 1L, 9L, 7L, 6L, 
-2L, 12L, 11L, 10L, 3L), .Label = c("Apr", "Aug", "Dec", "Feb", 
-"Jan", "Jul", "Jun", "Mar", "May", "Nov", "Oct", "Sep", "Year"
-), class = "factor"), Maximum.Absolute.Temperature = c(36.7, 
+structure(list(Month = c("Jan", "Feb", "Mar", "Apr", "May", "Jun", 
+"Jul", "Aug", "Sep", "Oct", "Nov", "Dec"), Maximum.Absolute.Temperature = c(36.7, 
 40.1, 36.2, 34.2, 32.6, 31, 32.1, 35.6, 37.8, 38, 37.4, 37.5), 
     Maximum.Average.Temperature = c(30.2, 30.5, 29.9, 27.8, 25.4, 
     24.6, 24.4, 26.4, 27.6, 27.5, 28.7, 29.1), Average.Temperature = c(23.3, 

@@ -159,7 +159,7 @@ Let's read a CSV file into R (check it here: https://github.com/rafaeldcsantos/C
 
 
 ```{r}
-taubateWeather <- read.csv(file="../Data/Taubate.csv", header=TRUE, sep=",")
+taubateWeather <- read.csv(file="../Data/Taubate.csv", header=TRUE, sep=",", stringsAsFactors=FALSE)
 taubateWeather
 ```
 
@@ -214,3 +214,23 @@ dump(c("taubateWeather","l","n","cc","v"), file = "../Data/SomeMixedData.R")
 
 See the file here:
 https://github.com/rafaeldcsantos/CAP386/blob/master/Data/SomeMixedData.R
+
+## Missing Values (again)
+
+File with missing data: https://github.com/rafaeldcsantos/CAP386/blob/master/Data/TaubateMissing.R
+
+```{r}
+taubateMissing <- read.csv(file="../Data/TaubateMissing.csv", header=TRUE, sep=",", stringsAsFactors=FALSE)
+taubateMissing
+str(taubateMissing)
+```
+
+Which are the rows with complete cases?
+
+```{r}
+complete.cases(taubateMissing)
+okdata <- subset(taubateMissing,complete.cases(taubateMissing))
+str(okdata)
+```
+
+
