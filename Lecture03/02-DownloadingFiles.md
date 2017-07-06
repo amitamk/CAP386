@@ -72,7 +72,7 @@ file.info("../Data/Taubate.csv")
     ##                     size isdir mode               mtime
     ## ../Data/Taubate.csv  829 FALSE  644 2017-06-26 15:56:46
     ##                                   ctime               atime uid gid  uname
-    ## ../Data/Taubate.csv 2017-06-26 15:56:46 2017-06-29 21:25:16 501  20 rafael
+    ## ../Data/Taubate.csv 2017-06-26 15:56:46 2017-07-06 11:35:20 501  20 rafael
     ##                     grname
     ## ../Data/Taubate.csv  staff
 
@@ -88,7 +88,7 @@ age <- Sys.time()-(file.info("../Data/Taubate.csv")$ctime)
 age
 ```
 
-    ## Time difference of 9.761911 days
+    ## Time difference of 9.897519 days
 
 ``` r
 if (age > 7)
@@ -105,7 +105,7 @@ Conditional directory creation:
 file.exists("../TempData")
 ```
 
-    ## [1] FALSE
+    ## [1] TRUE
 
 ``` r
 if (!file.exists("../TempData"))

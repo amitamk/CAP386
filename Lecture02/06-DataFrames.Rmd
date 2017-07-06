@@ -63,6 +63,7 @@ Even more information (statistics) with <tt>summary</tt>:
 summary(sjcTemps)
 ```
 
+
 ### Accessing Data Frames Elements
 
 Accessing by columns' names
@@ -232,5 +233,6 @@ complete.cases(taubateMissing)
 okdata <- subset(taubateMissing,complete.cases(taubateMissing))
 str(okdata)
 ```
+
 
 
