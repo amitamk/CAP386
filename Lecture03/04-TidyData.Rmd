@@ -97,3 +97,9 @@ head(subset(bVendors, select = c(location,lat,long)))
 
 ## Now for the exercises!
 
+```{r}
+bVendors$hotdog <- grepl("Hot dog",bVendors$ItemsSold)
+head(subset(bVendors, select = c(ItemsSold,hotdog)))
+```
+
+

@@ -171,3 +171,23 @@ head(subset(bVendors, select = c(location,lat,long)))
 
 Now for the exercises!
 ----------------------
+
+``` r
+bVendors$hotdog <- grepl("Hot dog",bVendors$ItemsSold)
+head(subset(bVendors, select = c(ItemsSold,hotdog)))
+```
+
+    ##                                                                  ItemsSold
+    ## 1                              Grilled food, pizza slices, gyro sandwiches
+    ## 2                          Hot Dogs, Sausage, Snacks, Gum, Candies, Drinks
+    ## 3                          Hot dogs, Sausage, drinks, snacks, gum, & candy
+    ## 4                           Hot dogs, sausages, chips, snacks, drinks, gum
+    ## 5 Large & Small beef franks, soft drinks, water, all types of nuts & chips
+    ## 6                                                   Hot dogs, Sodas, Chips
+    ##   hotdog
+    ## 1  FALSE
+    ## 2  FALSE
+    ## 3   TRUE
+    ## 4   TRUE
+    ## 5  FALSE
+    ## 6   TRUE

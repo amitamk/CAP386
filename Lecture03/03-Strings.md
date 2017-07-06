@@ -143,6 +143,38 @@ grep("n$",names)
 
     ## [1] 4
 
+<tt>grepl</tt> may be more useful:
+
+``` r
+grepl("Allan",names)
+```
+
+    ## [1]  TRUE FALSE FALSE  TRUE
+
+``` r
+grepl("^Allan",names)
+```
+
+    ## [1] FALSE FALSE FALSE  TRUE
+
+``` r
+grepl("Allan|Edgar",names)
+```
+
+    ## [1]  TRUE  TRUE FALSE  TRUE
+
+``` r
+grepl("^[Allan|Alan]",names)
+```
+
+    ## [1] FALSE FALSE  TRUE  TRUE
+
+``` r
+grepl("n$",names)
+```
+
+    ## [1] FALSE FALSE FALSE  TRUE
+
 ### gsub
 
 ``` r

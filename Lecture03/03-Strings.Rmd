@@ -62,6 +62,15 @@ grep("^[Allan|Alan]",names)
 grep("n$",names)
 ```
 
+<tt>grepl</tt> may be more useful:
+```{r}
+grepl("Allan",names)
+grepl("^Allan",names)
+grepl("Allan|Edgar",names)
+grepl("^[Allan|Alan]",names)
+grepl("n$",names)
+```
+
 ### gsub
 
 ```{r}
